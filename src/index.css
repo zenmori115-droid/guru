@@ -1,0 +1,123 @@
+@import "tailwindcss";
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --font-sans: "Plus Jakarta Sans", ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+}
+
+@layer base {
+  html {
+    font-family: var(--font-sans);
+    scroll-behavior: smooth;
+  }
+
+  body {
+    min-height: 100vh;
+    background-color: #f3f7ff;
+    color: #0b1b3a;
+    overflow-x: hidden;
+  }
+
+  .dark body {
+    background-color: #050b1f;
+    color: #eaf1ff;
+  }
+}
+
+/* Subtle animated aurora backdrop */
+@keyframes auroraDriftOne {
+  0%,
+  100% {
+    transform: translate3d(0%, 0%, 0) scale(1);
+    opacity: 0.55;
+  }
+  50% {
+    transform: translate3d(5%, 4%, 0) scale(1.08);
+    opacity: 0.72;
+  }
+}
+
+@keyframes auroraDriftTwo {
+  0%,
+  100% {
+    transform: translate3d(0%, 0%, 0) scale(1);
+    opacity: 0.42;
+  }
+  50% {
+    transform: translate3d(-6%, -4%, 0) scale(1.1);
+    opacity: 0.6;
+  }
+}
+
+@keyframes orangeGlowPulse {
+  0%,
+  100% {
+    box-shadow: 0 0 22px rgba(255, 138, 31, 0.42), 0 8px 24px rgba(255, 138, 31, 0.28);
+  }
+  50% {
+    box-shadow: 0 0 36px rgba(255, 159, 67, 0.68), 0 10px 30px rgba(255, 138, 31, 0.42);
+  }
+}
+
+@keyframes shimmerSlide {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+.aurora-layer-1 {
+  animation: auroraDriftOne 20s ease-in-out infinite;
+}
+
+.aurora-layer-2 {
+  animation: auroraDriftTwo 26s ease-in-out infinite;
+}
+
+.btn-orange-glow {
+  box-shadow: 0 0 20px rgba(255, 138, 31, 0.34), 0 8px 22px rgba(255, 138, 31, 0.24);
+  transition: transform 180ms cubic-bezier(0.16, 1, 0.3, 1), box-shadow 220ms ease, background-color 180ms ease;
+}
+
+.btn-orange-glow:hover:not(:disabled),
+.btn-orange-glow:focus-visible:not(:disabled) {
+  box-shadow: 0 0 32px rgba(255, 159, 67, 0.56), 0 12px 28px rgba(255, 138, 31, 0.36);
+}
+
+.btn-orange-loading {
+  animation: orangeGlowPulse 1.6s ease-in-out infinite;
+}
+
+.skeleton-shimmer {
+  position: relative;
+  overflow: hidden;
+}
+
+.skeleton-shimmer::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(125, 180, 255, 0.14) 50%,
+    transparent 100%
+  );
+  animation: shimmerSlide 1.5s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .aurora-layer-1,
+  .aurora-layer-2,
+  .btn-orange-loading,
+  .skeleton-shimmer::after {
+    animation: none !important;
+  }
+}

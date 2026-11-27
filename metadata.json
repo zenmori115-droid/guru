@@ -1,0 +1,6 @@
+{
+  "name": "LaporKu Guru",
+  "description": "Generator pesan laporan perkembangan siswa berbasis AI untuk dikirim ke WhatsApp wali murid. Pesan jujur, tetap sopan.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
